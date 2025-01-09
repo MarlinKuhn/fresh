@@ -6,6 +6,7 @@ package runner
 import (
 	"os/exec"
 	"strings"
+	"syscall"
 )
 
 // Cmd constructs a raw exec.Cmd to let it parse arguments
@@ -15,6 +16,7 @@ func Cmd(cmdName string, args string) *exec.Cmd {
 	// that splits them into separate exec.Comman args
 	// TODO(zzwx): Might need to deal with quoting
 	cmd := exec.Command(cmdName, strings.Fields(args)...)
+	cmd.SysProcAttr = &syscall.SysProcAttr{Setpgid: true}
 	return cmd
 }
 
