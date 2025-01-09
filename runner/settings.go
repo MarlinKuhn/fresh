@@ -42,7 +42,6 @@ type Settings struct {
 	LogColorApp     string `yaml:"log_color_app"`
 	Delve           bool   `yaml:"delve"`
 	DelveArgs       string `yaml:"delve_args"`
-	GracefulStop    bool   `yaml:"graceful_stop"`
 	Debug           bool   `yaml:"debug"`
 }
 
@@ -363,10 +362,6 @@ func delveArgs() string {
 	}
 
 	return settings.DelveArgs
-}
-
-func isGracefulStop() bool {
-	return settings.GracefulStop || settings.Delve
 }
 
 func isDebug() bool {

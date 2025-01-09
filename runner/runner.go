@@ -2,10 +2,8 @@ package runner
 
 import (
 	"io"
-	"os"
 	"os/exec"
-	"runtime"
-	"time"
+	"syscall"
 )
 
 func run() {
@@ -48,24 +46,9 @@ func run() {
 		pid := cmd.Process.Pid
 		runnerLog("Killing PID %d", pid)
 
-		if runtime.GOOS == "windows" || !isGracefulStop() {
-			if err := cmd.Process.Kill(); err != nil {
-				if isDebug() {
-					runnerLog("Killing PID %d error: %v", pid, err)
-				}
-			}
-		} else {
-			go func() {
-				time.Sleep(10 * time.Second)
-				_ = cmd.Process.Kill()
-				if isDebug() {
-					runnerLog("Force killing PID %d error: %v", pid, err)
-				}
-			}()
-			if err := cmd.Process.Signal(os.Interrupt); err != nil {
-				if isDebug() {
-					runnerLog("Interrupting PID %d error: %v", pid, err)
-				}
+		if err := syscall.Kill(-pid, syscall.SIGKILL); err != nil {
+			if isDebug() {
+				runnerLog("Killing PID %d error: %v", pid, err)
 			}
 		}
 
