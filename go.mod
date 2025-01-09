@@ -1,4 +1,4 @@
-module github.com/zzwx/fresh
+module github.com/MarlinKuhn/fresh
 
 go 1.16
 
