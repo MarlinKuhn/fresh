@@ -3,7 +3,6 @@ package runner
 import (
 	"io"
 	"os/exec"
-	"syscall"
 )
 
 func run() {
@@ -45,8 +44,8 @@ func run() {
 
 		pid := cmd.Process.Pid
 		runnerLog("Killing PID %d", pid)
-
-		if err := syscall.Kill(-pid, syscall.SIGKILL); err != nil {
+		killCmd := Cmd("pkill", buildPath())
+		if err := killCmd.Run(); err != nil {
 			if isDebug() {
 				runnerLog("Killing PID %d error: %v", pid, err)
 			}
