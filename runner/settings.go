@@ -42,6 +42,7 @@ type Settings struct {
 	LogColorApp     string `yaml:"log_color_app"`
 	Delve           bool   `yaml:"delve"`
 	DelveArgs       string `yaml:"delve_args"`
+	GracefulStop    bool   `yaml:"graceful_stop"`
 	Debug           bool   `yaml:"debug"`
 }
 
@@ -67,9 +68,9 @@ func init() {
 	settings.LogColorBuild = "yellow"
 	settings.LogColorRunner = "green"
 	settings.LogColorWatcher = "magenta"
-	//settings.LogColorApp
-	//settings.Delve
-	//settings.DelveArgs
+	// settings.LogColorApp
+	// settings.Delve
+	// settings.DelveArgs
 	settings.Debug = true
 }
 
@@ -198,7 +199,7 @@ func loadEnvSettings() {
 							field.SetUint(u)
 						}
 					}
-					//runnerLog("Set %q from env %q to %v", t.Field(i).Name, envKey, value)
+					// runnerLog("Set %q from env %q to %v", t.Field(i).Name, envKey, value)
 				}
 			}
 		}
@@ -357,7 +358,15 @@ func mustUseDelve() bool {
 }
 
 func delveArgs() string {
+	if len(settings.DelveArgs) == 0 {
+		return "--listen=:40000 --api-version=2 --headless=true --accept-multiclient exec --continue " + buildPath() + " -- " + runArgs()
+	}
+
 	return settings.DelveArgs
+}
+
+func isGracefulStop() bool {
+	return settings.GracefulStop || settings.Delve
 }
 
 func isDebug() bool {
