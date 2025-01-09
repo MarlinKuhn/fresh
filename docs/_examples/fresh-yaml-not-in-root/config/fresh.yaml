@@ -1,6 +1,6 @@
 version:           1
 root:              .
-main_path:         github.com/zzwx/fresh/docs/_examples/fresh-yaml-not-in-root/src
+main_path:         github.com/MarlinKuhn/fresh/docs/_examples/fresh-yaml-not-in-root/src
 tmp_path:          ./tmp
 build_name:        runner-build
 build_args:        ""

@@ -1,14 +1,14 @@
-[![https://github.com/zzwx/fresh](./docs/gobadge.svg)](https://pkg.go.dev/github.com/zzwx/fresh)
+[![https://github.com/MarlinKuhn/fresh](./docs/gobadge.svg)](https://pkg.go.dev/github.com/MarlinKuhn/fresh)
 
 # Fresh
 
-[Fresh](https://github.com/zzwx/fresh) is a command-line tool for hot reload that builds and (re)starts your written in Go application, including a web app, every time you save a `.go` or template file or any desired files you specify using configuration.
+[Fresh](https://github.com/MarlinKuhn/fresh) is a command-line tool for hot reload that builds and (re)starts your written in Go application, including a web app, every time you save a `.go` or template file or any desired files you specify using configuration.
 It is not aiming to gracefully shutdown the server, but rather simply restart it, killing the other process.
 
 ## Installation
 
-* `go install github.com/zzwx/fresh@latest` - latest release.
-* `go install github.com/zzwx/fresh@master` - bleeding edge. 
+* `go install github.com/MarlinKuhn/fresh@latest` - latest release.
+* `go install github.com/MarlinKuhn/fresh@master` - bleeding edge. 
 
 ## History
 
@@ -16,7 +16,7 @@ This fork is taken from original [fresh](https://github.com/gravityblast/fresh) 
 Several changes were pulled from the Roger Russel's [fresher](https://github.com/roger-russel/fresher.git) repository. All the authors are appropriately acknowledged using the `git` history.
 I kept the name **fresh** because it is easier to remember.
 
-After installing with `go install github.com/zzwx/fresh@latest`, fresh can be started as simply `fresh -g` to generate a default config file. This prevents running `fresh` on an unexpected folder.
+After installing with `go install github.com/MarlinKuhn/fresh@latest`, fresh can be started as simply `fresh -g` to generate a default config file. This prevents running `fresh` on an unexpected folder.
 When `fresh` runs on a folder that contains `.fresh.yaml` (default name), it will watch for file events, and every time you create / modify or delete a file it will build and restart the application.
 
 If `go build` returns an error, it will create a log file in the `./tmp` (configurable) folder and keep watching, attempting to rebuild. It will also attempt to kill previously created processes.
@@ -187,7 +187,7 @@ log_color_app:
 debug: true # Set to false to make fresh less verbose
 ```
 
-More examples can be seen [here](https://github.com/zzwx/fresh/tree/master/docs/_examples)
+More examples can be seen [here](https://github.com/MarlinKuhn/fresh/tree/master/docs/_examples)
 
 ## Changes tracking
 

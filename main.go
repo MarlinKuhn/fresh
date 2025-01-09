@@ -8,18 +8,18 @@ If `go build` returns an error, it will create a log file in the tmp folder and 
 It will also attempt to kill previously created processes.
 
 This is a fork of an original fresh (https://github.com/pilu/fresh) that is announced as unmaintained.
-
 */
 package main
 
 import (
 	"flag"
 	"fmt"
-	"github.com/zzwx/fresh/runner"
 	"os"
+
+	"github.com/MarlinKuhn/fresh/runner"
 )
 
-const VERSION = "1.3.4"
+const VERSION = "1.0.2"
 
 func main() {
 	var version *bool
