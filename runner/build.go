@@ -9,9 +9,6 @@ import (
 )
 
 func build() error {
-	if mustUseDelve() {
-		return nil
-	}
 	parts := []string{"build"}
 	if buildPath() != "" {
 		parts = append(parts, "-o")
