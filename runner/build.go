@@ -4,7 +4,7 @@ import (
 	"errors"
 	"io"
 	"os"
-	"strings"
+	"os/exec"
 )
 
 func build() error {
@@ -22,7 +22,7 @@ func build() error {
 	if mainPath() != "" {
 		parts = append(parts, mainPath())
 	}
-	cmd := Cmd("go", strings.Join(parts, " "))
+	cmd := exec.Command("go", parts...)
 	buildLog("Building %v", CmdStr(cmd))
 
 	stderr, err := cmd.StderrPipe()
