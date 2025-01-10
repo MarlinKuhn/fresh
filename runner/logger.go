@@ -62,3 +62,10 @@ func (a appLogWriter) Write(p []byte) (n int, err error) {
 	appLog(string(p))
 	return len(p), nil
 }
+
+type debuggerLogWriter struct{}
+
+func (a debuggerLogWriter) Write(p []byte) (n int, err error) {
+	debuggerLog(string(p))
+	return len(p), nil
+}

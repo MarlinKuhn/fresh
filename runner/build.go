@@ -3,7 +3,6 @@ package runner
 import (
 	"errors"
 	"io"
-	"io/ioutil"
 	"os"
 	"strings"
 )
@@ -13,6 +12,9 @@ func build() error {
 	if buildPath() != "" {
 		parts = append(parts, "-o")
 		parts = append(parts, buildPath())
+	}
+	if mustUseDelve() {
+		parts = append(parts, "-gcflags=\"all=-N -l\"")
 	}
 	if buildArgs() != "" {
 		parts = append(parts, buildArgs())
@@ -39,7 +41,7 @@ func build() error {
 	}
 
 	io.Copy(os.Stdout, stdout)
-	errBuf, _ := ioutil.ReadAll(stderr)
+	errBuf, _ := io.ReadAll(stderr)
 
 	err = cmd.Wait()
 	if err != nil {

@@ -24,6 +24,7 @@ var (
 	runnerLog       logFunc
 	buildLog        logFunc
 	appLog          logFunc
+	debuggerLog     logFunc
 )
 
 func flushEvents() {
@@ -117,6 +118,7 @@ func initLogFuncs() {
 	runnerLog = newLogFunc("runner", true)
 	buildLog = newLogFunc("build", true)
 	appLog = newLogFunc("app", false)
+	debuggerLog = newLogFunc("debugger", false)
 }
 
 func setEnvVars() {
@@ -144,7 +146,7 @@ func setEnvVars() {
 			if err != nil {
 				fmt.Printf("Error setting %q to %v due to %v", envKey, field.String(), err)
 			}
-			//runnerLog("%v set to %q", envKey, os.Getenv(envKey))
+			// runnerLog("%v set to %q", envKey, os.Getenv(envKey))
 		}
 	}
 
