@@ -22,27 +22,28 @@ var ConfigPath string
 var EnvPrefix = "RUNNER_"
 
 type Settings struct {
-	Version         string `yaml:"version"`
-	Root            string `yaml:"root"`
-	MainPath        string `yaml:"main_path"`
-	TmpPath         string `yaml:"tmp_path"`
-	BuildName       string `yaml:"build_name"`
-	BuildArgs       string `yaml:"build_args"`
-	RunArgs         string `yaml:"run_args"`
-	BuildLog        string `yaml:"build_log"`
-	ValidExt        string `yaml:"valid_ext"`
-	NoRebuildExt    string `yaml:"no_rebuild_ext"`
-	Ignore          string `yaml:"ignore"`
-	BuildDelay      string `yaml:"build_delay"` // Number: Nanoseconds, otherwise - parse Duration
-	Colors          bool   `yaml:"colors"`
-	LogColorMain    string `yaml:"log_color_main"`
-	LogColorBuild   string `yaml:"log_color_build"`
-	LogColorRunner  string `yaml:"log_color_runner"`
-	LogColorWatcher string `yaml:"log_color_watcher"`
-	LogColorApp     string `yaml:"log_color_app"`
-	Delve           bool   `yaml:"delve"`
-	DelveArgs       string `yaml:"delve_args"`
-	Debug           bool   `yaml:"debug"`
+	Version          string `yaml:"version"`
+	Root             string `yaml:"root"`
+	MainPath         string `yaml:"main_path"`
+	TmpPath          string `yaml:"tmp_path"`
+	BuildName        string `yaml:"build_name"`
+	BuildArgs        string `yaml:"build_args"`
+	RunArgs          string `yaml:"run_args"`
+	BuildLog         string `yaml:"build_log"`
+	ValidExt         string `yaml:"valid_ext"`
+	NoRebuildExt     string `yaml:"no_rebuild_ext"`
+	Ignore           string `yaml:"ignore"`
+	BuildDelay       string `yaml:"build_delay"` // Number: Nanoseconds, otherwise - parse Duration
+	Colors           bool   `yaml:"colors"`
+	LogColorMain     string `yaml:"log_color_main"`
+	LogColorBuild    string `yaml:"log_color_build"`
+	LogColorRunner   string `yaml:"log_color_runner"`
+	LogColorWatcher  string `yaml:"log_color_watcher"`
+	LogColorApp      string `yaml:"log_color_app"`
+	LogColorDebugger string `yaml:"log_color_debugger"`
+	Delve            bool   `yaml:"delve"`
+	DelveArgs        string `yaml:"delve_args"`
+	Debug            bool   `yaml:"debug"`
 }
 
 var settings Settings
@@ -67,6 +68,7 @@ func init() {
 	settings.LogColorBuild = "yellow"
 	settings.LogColorRunner = "green"
 	settings.LogColorWatcher = "magenta"
+	settings.LogColorDebugger = "blue"
 	// settings.LogColorApp
 	// settings.Delve
 	// settings.DelveArgs
@@ -139,6 +141,8 @@ func logColor(logName string) string {
 		clr = settings.LogColorWatcher
 	case "app":
 		clr = settings.LogColorApp
+	case "debugger":
+		clr = settings.LogColorDebugger
 	default:
 		panic("unknown color type: " + logName)
 	}
