@@ -14,7 +14,7 @@ func build() error {
 		parts = append(parts, buildPath())
 	}
 	if mustUseDelve() {
-		parts = append(parts, "-gcflags", "'all=-N -l'")
+		parts = append(parts, "-gcflags", "all=-N -l")
 	}
 	if buildArgs() != "" {
 		parts = append(parts, buildArgs())
