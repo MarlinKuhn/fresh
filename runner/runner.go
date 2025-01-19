@@ -10,7 +10,7 @@ import (
 func getDebugCommand(pid int) (string, []string) {
 	params := []string{"attach",
 		strconv.Itoa(pid),
-		"--listen=:40000",
+		"--listen=" + delveListen(),
 		"--headless",
 		"--api-version=2",
 		"--accept-multiclient"}

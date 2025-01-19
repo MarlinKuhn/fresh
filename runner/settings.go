@@ -43,6 +43,7 @@ type Settings struct {
 	LogColorDebugger string `yaml:"log_color_debugger"`
 	Delve            bool   `yaml:"delve"`
 	DelveArgs        string `yaml:"delve_args"`
+	DelveListen      string `yaml:"delve_listen"`
 	Debug            bool   `yaml:"debug"`
 }
 
@@ -72,6 +73,7 @@ func init() {
 	// settings.LogColorApp
 	// settings.Delve
 	// settings.DelveArgs
+	settings.DelveListen = ":40000"
 	settings.Debug = true
 }
 
@@ -360,9 +362,13 @@ func mustUseDelve() bool {
 	return settings.Delve
 }
 
+func delveListen() string {
+	return settings.DelveListen
+}
+
 func delveArgs() string {
 	if len(settings.DelveArgs) == 0 {
-		return "--listen=:40000 --api-version=2 --headless=true --accept-multiclient exec --continue " + buildPath() + " -- " + runArgs()
+		return "exec --continue " + buildPath() + " -- " + runArgs()
 	}
 
 	return settings.DelveArgs
